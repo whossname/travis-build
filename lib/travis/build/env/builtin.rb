@@ -23,7 +23,7 @@ module Travis
         private
 
           def env_vars
-            {
+            vars = {
               TRAVIS:                 true,
               CI:                     true,
               CONTINUOUS_INTEGRATION: true,
@@ -53,6 +53,12 @@ module Travis
               TRAVIS_PULL_REQUEST_SHA: job[:pull_request_head_sha],
               TRAVIS_PULL_REQUEST_SLUG: job[:pull_request_head_slug],
             }
+
+            if app_host = Travis::Build.config.app_host
+              vars[:TRAVIS_LOG_URL] = ("https://%s/%s/jobs/%s" % [app_host, repository[:slug], job[:id]]).untaint
+            end
+
+            vars
           end
       end
     end
