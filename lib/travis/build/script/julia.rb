@@ -106,7 +106,7 @@ module Travis
           end
         end
 
-        def after_success
+        def after_after_success
           super
 
           # coverage
