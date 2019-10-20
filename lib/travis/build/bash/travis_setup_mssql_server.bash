@@ -8,9 +8,6 @@ travis_setup_mssql_server() {
   local ubuntu_version
 
   case "${TRAVIS_DIST}" in
-  precise)
-    ubuntu_version='12.04'
-    ;;
   trusty)
     ubuntu_version='14.04'
     ;;
@@ -42,8 +39,7 @@ travis_setup_mssql_server() {
   apt install -y msodbcsql17
   apt-get install -y mssql-tools unixodbc-dev
 
-  echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
-  echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+  export PATH="$PATH:/opt/mssql-tools/bin"
   source ~/.bashrc
 
   # start server
