@@ -1,14 +1,41 @@
 travis_setup_mssql_server() {
+  local mssql_version="${1}"
+
+  if [[ -z "${mssql_version}" ]]; then
+    mssql_version='2017'
+  fi
+
+  local ubuntu_version
+
+  case "${TRAVIS_DIST}" in
+  precise)
+    ubuntu_version='12.04'
+    ;;
+  trusty)
+    ubuntu_version='14.04'
+    ;;
+  xenial)
+    ubuntu_version='16.04'
+    ;;
+  bionic)
+    ubuntu_version='18.04'
+    ;;
+  *)
+    echo -e "${ANSI_RED}Unrecognized operating system.${ANSI_CLEAR}"
+    ;;
+  esac
+
+
   # install
   export ACCEPT_EULA=Y 
   echo -e "${ANSI_YELLOW}Installing MssqlServer${ANSI_CLEAR}"
 
-  # TODO check operating system
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
   curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-  sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2017.list)"
-  curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
+  local package_uri="https://packages.microsoft.com/config/ubuntu/${ubuntu_version}"
+  sudo add-apt-repository "$(wget -qO- ${package_uri}/mssql-server-${mssql_version}.list)"
+  curl ${package_uri}/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 
   sudo apt-get update
   sudo apt-get install -y mssql-server
@@ -25,4 +52,7 @@ travis_setup_mssql_server() {
   export MSSQL_SA_PASSWORD="Password1!"
   sudo -E /opt/mssql/bin/mssql-conf -n setup
   systemctl status mssql-server --no-pager
+
+  export SQLCMDPASSWORD=$MSSQL_SA_PASSWORD
+  export SQLCMDUSER='sa'
 }
