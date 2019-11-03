@@ -47,10 +47,6 @@ travis_setup_mssql_server() {
   # start server
   echo -e "${ANSI_YELLOW}Starting MssqlServer${ANSI_CLEAR}"
   # TODO set password
-  export MSSQL_SA_PASSWORD="Password1!"
-  sudo -E /opt/mssql/bin/mssql-conf -n setup
+  sudo env MSSQL_SA_PASSWORD="Password1!" /opt/mssql/bin/mssql-conf -n setup
   systemctl status mssql-server --no-pager
-
-  export SQLCMDPASSWORD=$MSSQL_SA_PASSWORD
-  export SQLCMDUSER='sa'
 }
