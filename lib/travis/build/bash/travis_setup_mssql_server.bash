@@ -14,7 +14,8 @@ travis_setup_mssql_server() {
     # use xenial
     ubuntu_version='16.04'
     # install libjemalloc
-    wget -qO- http://ftp.osuosl.org/pub/ubuntu/pool/universe/j/jemalloc/libjemalloc1_3.6.0-11_amd64.deb | dpkg -i -
+    wget -q http://ftp.osuosl.org/pub/ubuntu/pool/universe/j/jemalloc/libjemalloc1_3.6.0-11_amd64.deb
+    dpkg -i libjemalloc1_3.6.0-11_amd64.deb
     ;;
   *)
     echo -e "${ANSI_RED}Unrecognized operating system.${ANSI_CLEAR}"
