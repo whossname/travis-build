@@ -46,7 +46,7 @@ travis_setup_mssql_server() {
 
   # start server
   echo -e "${ANSI_YELLOW}Starting MssqlServer${ANSI_CLEAR}"
-  # TODO set password
-  sudo env MSSQL_SA_PASSWORD="Password1!" /opt/mssql/bin/mssql-conf -n setup
+  sudo env MSSQL_SA_PASSWORD="Password1!" /opt/mssql/bin/mssql-conf -n setup accept-eula
   systemctl status mssql-server --no-pager
+  # TODO set no password
 }
