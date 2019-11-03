@@ -5,6 +5,8 @@ travis_setup_mssql_server() {
     mssql_version='2017'
   fi
 
+  echo "mssql version: ${mssql_version}"
+
   local ubuntu_version
 
   case "${TRAVIS_DIST}" in
@@ -34,9 +36,9 @@ travis_setup_mssql_server() {
   curl ${package_uri}/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 
   sudo apt-get update
-  ACCEPT_EULA=Y sudo apt-get install -y mssql-server
-  ACCEPT_EULA=Y apt install -y msodbcsql17
-  ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+  env ACCEPT_EULA=Y apt-get install -y mssql-server
+  env ACCEPT_EULA=Y apt install -y msodbcsql17
+  env ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
   export PATH="$PATH:/opt/mssql-tools/bin"
   source ~/.bashrc
