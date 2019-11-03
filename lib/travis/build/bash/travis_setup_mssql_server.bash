@@ -10,12 +10,6 @@ travis_setup_mssql_server() {
   xenial)
     ubuntu_version='16.04'
     ;;
-  bionic)
-    ubuntu_version='18.04'
-    if [[ -z "${mssql_version}" ]]; then
-      mssql_version='2019'
-    fi
-    ;;
   *)
     echo -e "${ANSI_RED}Unrecognized operating system.${ANSI_CLEAR}"
     ;;
@@ -37,9 +31,9 @@ travis_setup_mssql_server() {
   curl ${package_uri}/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 
   sudo apt-get update
-  env ACCEPT_EULA=Y apt-get install -y mssql-server
-  env ACCEPT_EULA=Y apt install -y msodbcsql17
-  env ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
+  sudo env ACCEPT_EULA=Y apt-get install -y mssql-server
+  sudo env ACCEPT_EULA=Y apt install -y msodbcsql17
+  sudo env ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
   export PATH="$PATH:/opt/mssql-tools/bin"
   source ~/.bashrc
