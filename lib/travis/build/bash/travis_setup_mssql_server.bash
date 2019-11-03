@@ -1,12 +1,6 @@
 travis_setup_mssql_server() {
   local mssql_version="${1}"
 
-  if [[ -z "${mssql_version}" ]]; then
-    mssql_version='2017'
-  fi
-
-  echo "mssql version: $mssql_version"
-
   local ubuntu_version
 
   case "${TRAVIS_DIST}" in
@@ -18,14 +12,22 @@ travis_setup_mssql_server() {
     ;;
   bionic)
     ubuntu_version='18.04'
+    if [[ -z "${mssql_version}" ]]; then
+      mssql_version='2019'
+    fi
     ;;
   *)
     echo -e "${ANSI_RED}Unrecognized operating system.${ANSI_CLEAR}"
     ;;
   esac
 
+  if [[ -z "${mssql_version}" ]]; then
+    mssql_version='2017'
+  fi
+
+
   # install
-  echo -e "${ANSI_YELLOW}Installing MssqlServer${ANSI_CLEAR}"
+  echo -e "${ANSI_YELLOW}Installing MssqlServer $mssql_version ${ANSI_CLEAR}"
 
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
   curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
