@@ -24,7 +24,7 @@ travis_setup_mssql_server() {
 
 
   # install
-  export ACCEPT_EULA=Y 
+  local ACCEPT_EULA=Y 
   echo -e "${ANSI_YELLOW}Installing MssqlServer${ANSI_CLEAR}"
 
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
