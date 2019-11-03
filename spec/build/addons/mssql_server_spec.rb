@@ -18,10 +18,10 @@ describe Travis::Build::Addons::MssqlServer, :sexp do
   it_behaves_like 'compiled script' do
     let(:code) { [
       "ubuntu_version='16.04'",
-      'sudo apt-get install -y mssql-server',
-      'apt install -y msodbcsql17',
-      'apt-get install -y mssql-tools unixodbc-dev',
-      'sudo -E /opt/mssql/bin/mssql-conf -n setup',
+      'sudo env ACCEPT_EULA=Y apt-get install -y mssql-server',
+      'sudo env ACCEPT_EULA=Y apt install -y msodbcsql17',
+      'sudo env ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev',
+      'sudo env MSSQL_SA_PASSWORD="Password1!" /opt/mssql/bin/mssql-conf -n setup accept-eula',
       'systemctl status mssql-server --no-pager'
     ] }
   end

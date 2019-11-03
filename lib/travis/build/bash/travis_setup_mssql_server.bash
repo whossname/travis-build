@@ -42,7 +42,6 @@ travis_setup_mssql_server() {
   sudo env ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
   export PATH="$PATH:/opt/mssql-tools/bin"
-  source ~/.bashrc
 
   # start server
   echo -e "${ANSI_YELLOW}Starting MssqlServer${ANSI_CLEAR}"
@@ -50,6 +49,6 @@ travis_setup_mssql_server() {
   systemctl status mssql-server --no-pager
 
   # set no password
-  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Password1$ -Q "alter login [sa] with CHECK_POLICY=OFF"
-  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P Password1$ -Q "alter login [sa] with PASSWORD=N''"
+  sqlcmd -S localhost -U SA -P Password1! -Q "alter login [sa] with CHECK_POLICY=OFF"
+  sqlcmd -S localhost -U SA -P Password1! -Q "alter login [sa] with PASSWORD=N''"
 }
