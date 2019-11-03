@@ -24,7 +24,6 @@ travis_setup_mssql_server() {
 
 
   # install
-  local ACCEPT_EULA=Y 
   echo -e "${ANSI_YELLOW}Installing MssqlServer${ANSI_CLEAR}"
 
   wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
@@ -35,9 +34,9 @@ travis_setup_mssql_server() {
   curl ${package_uri}/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
 
   sudo apt-get update
-  sudo apt-get install -y mssql-server
-  apt install -y msodbcsql17
-  apt-get install -y mssql-tools unixodbc-dev
+  ACCEPT_EULA=Y sudo apt-get install -y mssql-server
+  ACCEPT_EULA=Y apt install -y msodbcsql17
+  ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
 
   export PATH="$PATH:/opt/mssql-tools/bin"
   source ~/.bashrc
