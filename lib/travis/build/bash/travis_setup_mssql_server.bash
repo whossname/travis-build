@@ -5,7 +5,7 @@ travis_setup_mssql_server() {
     mssql_version='2017'
   fi
 
-  echo "mssql version: ${mssql_version}"
+  echo -e "mssql version: ${mssql_version}"
 
   local ubuntu_version
 
