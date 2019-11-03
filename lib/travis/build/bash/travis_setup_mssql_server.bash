@@ -13,7 +13,7 @@ travis_setup_mssql_server() {
   bionic)
     # use xenial
     ubuntu_version='16.04'
-    # install libjemalloc
+    # install ubuntu universe
     sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     ;;
   *)
