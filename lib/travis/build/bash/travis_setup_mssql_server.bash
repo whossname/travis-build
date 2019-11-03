@@ -24,7 +24,6 @@ travis_setup_mssql_server() {
     ;;
   esac
 
-
   # install
   echo -e "${ANSI_YELLOW}Installing MssqlServer${ANSI_CLEAR}"
 
