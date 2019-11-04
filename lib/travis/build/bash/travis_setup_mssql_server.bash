@@ -25,7 +25,6 @@ travis_setup_mssql_server() {
     mssql_version='2017'
   fi
 
-
   # install
   echo -e "${ANSI_YELLOW}Installing MssqlServer $mssql_version ${ANSI_CLEAR}"
 
