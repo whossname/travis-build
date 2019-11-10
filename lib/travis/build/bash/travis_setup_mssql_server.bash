@@ -11,10 +11,11 @@ travis_setup_mssql_server() {
     ubuntu_version='16.04'
     ;;
   bionic)
-    # use xenial
-    ubuntu_version='16.04'
-    # install ubuntu universe
-    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
+    echo -e "${ANSI_RED}Ubuntu 18.04 (Bionic Beaver) not supported.${ANSI_CLEAR}"
+    ## use xenial
+    # ubuntu_version='16.04'
+    ## install ubuntu universe
+    # sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
     ;;
   *)
     echo -e "${ANSI_RED}Unrecognized operating system.${ANSI_CLEAR}"
